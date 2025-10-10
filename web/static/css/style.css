@@ -1,0 +1,155 @@
+@import url(https://fonts.bunny.net/css?family=poppins:300,300i,400,400i,700,700i);
+
+:root {
+	--black: #37353e;
+	--gray: #44444e;
+	--white: #ffffff;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	line-height: 1;
+	font-kerning: normal;
+}
+
+html {
+	color-scheme: dark;
+}
+
+body {
+	background-color: var(--gray);
+	font-family: "Poppins", sans-serif;
+	font-weight: 300;
+	font-size: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 400;
+}
+
+.navbar {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: start;
+	gap: 0;
+	padding: 1rem;
+	background-color: var(--black);
+
+	.nav-logo-wrapper {
+		display: flex;
+		justify-content: space-between;
+		gap: 0.5rem;
+		width: 100%;
+
+		.nav-logo {
+			.nav-logo-text {
+				font-size: 1.5rem;
+
+				a {
+					text-decoration: none;
+					color: inherit;
+					display: block;
+				}
+			}
+		}
+
+		.nav-items-toggler {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			padding-block: 0.125rem;
+
+			.bar1,
+			.bar2,
+			.bar3 {
+				width: 2rem;
+				height: 0.125rem;
+				background-color: var(--white);
+				transition: 200ms;
+			}
+
+			&.change {
+				.bar1 {
+					transform: translate(0, 0) rotate(-45deg);
+				}
+
+				.bar2 {
+					opacity: 0;
+				}
+
+				.bar3 {
+					transform: translate(0, 0) rotate(45deg);
+				}
+			}
+
+		}
+	}
+
+	.nav-items {
+		display: grid;
+		grid-template-rows: 0fr;
+		transition: grid-template-rows 200ms ease-out;
+		gap: 0.5rem;
+
+		&.show {
+			grid-template-rows: 1fr;
+
+			.nav-items-inner {
+				max-height: 100%;
+			}
+		}
+
+		.nav-items-inner {
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+
+
+		.nav-item {
+			padding-block: 0.5rem;
+		}
+
+
+		.nav-item-link {
+			text-decoration: none;
+			color: inherit;
+		}
+	}
+
+}
+
+@media (width > 575px) {
+	.navbar {
+		flex-direction: row;
+		justify-content: start;
+		align-items: center;
+
+		.nav-logo-wrapper {
+			flex-direction: column;
+			align-items: start;
+			width: auto;
+
+			.nav-items-toggler {
+				display: none;
+			}
+		}
+
+		.nav-items {
+			grid-template-rows: 1fr;
+
+			.nav-items-inner {
+				flex-direction: row;
+			}
+		}
+	}
+}
