@@ -1,0 +1,64 @@
+{{ define "experience-block" }}
+<div class="container">
+	<div class="experience-wrapper">
+		<div class="experience-section-title">
+			<h2>{{ .ExperienceBlock.ExperienceTitle }}</h2>
+		</div>
+		<div class="experience-timeline">
+			{{ range $index, $experience := .ExperienceBlock.Experiences }}
+			{{ if mod $index 2 }}
+			<div class="experience-timeline-left justify-end">
+				<div class="experience-content">
+					<div class="company-icon">
+						<img src="{{ $experience.Icon }}" alt="{{ $experience.Company }}">
+					</div>
+					<div class="experience-text">
+						<p class="font-weight-light">{{ $experience.Company }}</p>
+						<p class="font-weight-light">{{ $experience.Position }}</p>
+						<p class="text-sm">
+							<strong>
+								{{ $experience.EmploymentPeriod}}
+							</strong>
+						</p>
+					</div>
+				</div>
+				<div class="experience-line"></div>
+			</div>
+			<div class="timeline-dot"></div>
+			<div class="experience-timeline-right justify-start">
+				<div class="experience-line"></div>
+				<div class="experience-content">
+					<p>{{ $experience.Year }}</p>
+				</div>
+			</div>
+			{{ else }}
+			<div class="experience-timeline-left justify-end">
+				<div class="experience-content">
+					<p>{{ $experience.Year }}</p>
+				</div>
+				<div class="experience-line"></div>
+			</div>
+			<div class="timeline-dot"></div>
+			<div class="experience-timeline-right justify-start">
+				<div class="experience-line"></div>
+				<div class="experience-content">
+					<div class="company-icon">
+						<img src="{{ $experience.Icon }}" alt="{{ $experience.Company }}">
+					</div>
+					<div class="experience-text">
+						<p class="font-weight-light">{{ $experience.Company }}</p>
+						<p class="font-weight-light">{{ $experience.Position }}</p>
+						<p class="text-sm">
+							<strong>
+								{{ $experience.EmploymentPeriod}}
+							</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+			{{ end }}
+			{{ end }}
+		</div>
+	</div>
+</div>
+{{ end }}

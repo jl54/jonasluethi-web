@@ -1,0 +1,21 @@
+{{ define "about-block" }}
+<div class="container">
+	<div class="about-wrapper">
+		<div class="about-pic">
+			<img src="https://media.licdn.com/dms/image/v2/C4D03AQEPAelAt8RBAA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1539166851386?e=1767830400&v=beta&t=hoFzbIeIGH5spofpLPodFFydIzH12Supt7pFoF1nR9M"
+				alt="Jonas Lüthi">
+		</div>
+		<div class="about-content">
+			<span class="about-breadcrumb">{{ .AboutBlock.AboutTitle }}</span>
+			{{ range .AboutBlock.AboutSections }}
+			<h2>{{ .Title }}</h2>
+			<ul>
+				{{ range .Content }}
+				<li>{{ .Text }}</li>
+				{{ end }}
+			</ul>
+			{{ end }}
+		</div>
+	</div>
+</div>
+{{ end }}
