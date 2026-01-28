@@ -1,19 +1,8 @@
 {{ define "header" }}
-<header>
-  <div class="page-wrapper">
-    <div class="container">
-      <div class="flex gap-8 align-center wrap">
-        <div class="logo">jonasluethi.dev</div>
-        <div class="nav-items grow flex gap-8">
-          {{ range .Navigation.Items }}
-          <a href="{{ .Href }}" {{ if .Active }}class="active" {{ end }}
-            >{{ .Name }}</a
-          >
-          {{ end }}
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-<hr class="seperator" />
+
+<div class="container sticky top-0">
+  <header>
+    <h1>jonasluethi.dev</h1>
+  </header>
+</div>
 {{ end }}

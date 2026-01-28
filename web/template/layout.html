@@ -4,12 +4,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ .Title }}</title>
+    <title>{{ .PageMeta.Title }}</title>
+    <meta name="description" content="{{ .PageMeta.Description }}" />
     <link rel="stylesheet" href="/static/css/style.css" />
   </head>
   <body>
-    {{ block "header" . }}{{ end }}
-    <div class="content-wrapper">{{ block "content" . }}{{ end }}</div>
+    <div class="page-wrapper">
+      {{ block "header" . }}{{ end }}
+      <main class="content-wrapper">{{ block "content" . }}{{ end }}</main>
+    </div>
   </body>
 </html>
 {{ end }}

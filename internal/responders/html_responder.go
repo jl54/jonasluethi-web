@@ -4,11 +4,16 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+
+	"github.com/jl54/jonasluethi-web/internal/models"
 )
 
-func ResponWithHtml(w http.ResponseWriter, layoutFile, templateFile string, data any) {
-	t := template.New("layout").Funcs(template.FuncMap{"mod": func(i, j int) bool { return i%j == 0 }})
-	t, err := t.ParseFiles(layoutFile, templateFile)
+func RespondWithHtml(w http.ResponseWriter, data *models.Page) {
+	t := template.New("layout").Funcs(template.FuncMap{
+		"mod": func(i, j int) bool { return i%j == 0 },
+	})
+
+	t, err := t.ParseFiles(data.Layout, "web/template/content.html")
 
 	if err != nil {
 		log.Fatalf("failed to parse files: %v", err)

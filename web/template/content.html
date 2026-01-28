@@ -1,0 +1,10 @@
+{{ define "content" }}
+    {{ range .PageData }}
+        {{ if eq (.GetContentBlockType) "about-block" }}
+            {{ template "about-block" . }}
+        {{ else if eq (.GetContentBlockType) "experience-block" }}
+            {{ template "experience-block" . }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
