@@ -93,6 +93,10 @@ h2 {
   }
 }
 
+#nav-sentinel {
+    height: 1px;
+}
+
 header {
   background: var(--bg);
   padding: calc(var(--base-spacing) * 4);
@@ -100,6 +104,11 @@ header {
   border-radius: calc(var(--base-spacing) * 4);
   position: sticky;
   top: 0;
+}
+
+.is-sticky {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
 }
 
 .content-wrapper {
@@ -240,9 +249,9 @@ ul {
   }
 
   .experience-wrapper {
-      .experience-timeline {
-          .experience-card {
-          }
+    .experience-timeline {
+      .experience-card {
       }
+    }
   }
 }

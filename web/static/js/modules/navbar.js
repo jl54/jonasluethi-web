@@ -1,24 +1,29 @@
 export class Navbar {
-	static init() {
-		console.info("Initialize Navbar");
+    init() {
+        const navbar = document.querySelector("header");
 
-		const navbar = document.querySelector(".navbar");
+        if (!navbar) {
+            return;
+        }
 
-		if (!navbar) {
-			return;
-		}
+        const navbarWrapper = navbar.parentNode;
 
-		const navItemsToggler = navbar.querySelector(".nav-items-toggler");
-		const navItems = navbar.querySelector(".nav-items");
+        if (!navbarWrapper) {
+            return;
+        }
 
-		if (!navItemsToggler || !navItems) {
-			return;
-		}
+        this._checkIntersection(navbarWrapper, navbar);
+    }
 
-		navItemsToggler.addEventListener("click", () => {
-			console.debug("Toggle Navigation Items");
-			navItemsToggler.classList.toggle("change");
-			navItems.classList.toggle("show");
-		});
-	}
+    _checkIntersection(navbarWrapper, navbar) {
+        window.addEventListener("scroll", () => {
+            if (navbarWrapper.getBoundingClientRect().top <= 0) {
+                navbar.classList.add('is-sticky');
+            } else {
+                navbar.classList.remove('is-sticky');
+            }
+        }, {
+            passive: true
+        });
+    }
 }
