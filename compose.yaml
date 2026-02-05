@@ -1,0 +1,13 @@
+networks:
+  backend:
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .docker/Containerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    restart: unless-stopped
