@@ -1,1 +1,3 @@
 tmp/
+.terraform
+.terraform.lock.hcl
