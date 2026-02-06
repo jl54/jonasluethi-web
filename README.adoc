@@ -1,0 +1,44 @@
+= jonasluethi.dev
+:toc: auto
+
+== Introduction
+Source code and infrastructure config for my personal website.
+
+== Infrastructure
+=== Overview
+The infrastructure part of this project is responsible for creating or updating
+a VPS on Hetzner Cloud. The VPS is then used to deploy and run the website.
+
+The OpenTofu state is stored in Hetzner Object Storage to ensure a consistent
+state across multiple CI/CD runs.
+
+=== Environment Variables
+
+The following env variables need to be configured to run OpenTofu successfully.
+
+* TF_VAR_hcloud_token
+* AWS_ACCESS_KEY_ID
+* AWS_SECRET_ACCESS_KEY
+* AWS_DEFAULT_REGION
+* AWS_ENDPOINT_URL_S3
+
+== Application
+=== Tech Stack
+
+* Go
+* HTML
+* CSS
+* JavaScript
+
+=== Running Locally
+
+Just run `air` in the app directory. This starts a development server with auto
+reloading.
+
+=== Building
+
+`nerdctl compose build`
+
+or
+
+`docker compose build`
