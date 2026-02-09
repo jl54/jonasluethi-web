@@ -17,6 +17,8 @@ state across multiple CI/CD runs.
 The following env variables need to be configured to run OpenTofu successfully.
 
 * TF_VAR_hcloud_token
+* TF_VAR_hcloud_location
+* TF_VAR_ssh_keys='["key-1","key-2"]'
 * AWS_ACCESS_KEY_ID
 * AWS_SECRET_ACCESS_KEY
 * AWS_DEFAULT_REGION
