@@ -1,0 +1,77 @@
+---
+- name: Configure jl-web-01
+  hosts: all
+  become: true
+
+  vars:
+    app_user: jonas
+
+  tasks:
+    - name: Wait for SSH to be available
+      wait_for_connection:
+        timeout: 300
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade packages
+      apt:
+        upgrade: dist
+
+    - name: Install base packages
+      apt:
+        name:
+          - curl
+          - git
+          - ufw
+          - ca-certificates
+        state: present
+
+    - name: Create user
+      user:
+        name: "{{ app_user }}"
+        shell: /bin/bash
+        groups: docker
+        append: yes
+
+    - name: Allow SSH
+      ufw:
+        rule: allow
+        port: ssh
+
+    - name: Allow HTTP
+      ufw:
+        rule: allow
+        port: 80
+
+    - name: Allow HTTPS
+      ufw:
+        rule: allow
+        port: 443
+
+    - name: Enable UFW
+      ufw:
+        state: enabled
+
+    - name: Install Docker
+      shell: |
+        curl -fsSL https://get.docker.com | sh
+      args:
+        creates: /usr/bin/docker
+
+    - name: Enable Docker
+      systemd:
+        name: docker
+        enabled: true
+        state: started
+
+    - name: Add deploy user to docker group
+      user:
+        name: "{{ app_user }}"
+        groups: docker
+        append: yes
+
+    - name: Reboot if required
+      reboot:
+        reboot_timeout: 300

@@ -1,0 +1,73 @@
+name: Deploy infrastructure and configure server
+
+on:
+  push:
+    branches: [ "main" ]
+
+# Prevent concurrent applies
+concurrency:
+  group: prod
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install OpenTofu
+        run: |
+          curl -Lo tofu.tar.gz https://github.com/opentofu/opentofu/releases/latest/download/tofu_linux_amd64.tar.gz
+          tar xf tofu.tar.gz
+          sudo mv tofu /usr/local/bin/
+          tofu version
+
+      - name: Install Ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+
+      - name: Change to working directory
+        run: |
+          cd infra
+
+      - name: OpenTofu Init
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ENDPOINT_URL_S3: ${{ secrets.AWS_ENDPOINT_URL_S3 }}
+          AWS_DEFAULT_REGION: fsn1
+
+          TOFU_BUCKET: ${{ secrets.TOFU_BUCKET }}
+          TOFU_KEY: ${{ secrets.TOFU_KEY }}
+        run: |
+          rm -rf .terraform .terraform.lock.hcl
+
+          tofu init -reconfigure \
+            -backend-config="bucket=$TOFU_BUCKET" \
+
+      - name: OpenTofu Apply
+        env:
+          TF_VAR_ssh_keys: ${{ secrets.TF_VAR_ssh_keys }}
+        run: |
+          tofu apply -auto-approve
+
+      - name: Run Ansible
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"
+        run: |
+          IP=$(tofu output -raw ipv4_address)
+
+          ansible-playbook \
+            -i "$IP," \
+            -u root \
+            ansible/playbook.yml
