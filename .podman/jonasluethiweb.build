@@ -1,0 +1,5 @@
+[Build]
+ImageTag=localhost/jonasluethi-web:latest
+File=/home/jonas/projects/jonasluethi-web/app/.podman/Containerfile
+SetWorkingDirectory=/home/jonas/projects/jonasluethi-web/app
+

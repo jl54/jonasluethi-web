@@ -1,0 +1,13 @@
+[Unit]
+Description=jonasluethi.dev web app
+
+[Container]
+Image=jonasluethiweb.build
+ContainerName=jonasluethi-web
+Pod=jonasluethiweb.pod
+
+[Service]
+Restart=unless-stopped
+
+[Install]
+WantedBy=default.target
