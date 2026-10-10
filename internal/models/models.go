@@ -1,14 +1,14 @@
 package models
 
 type Page struct {
-	Layout string
-	PageMeta PageMeta  
-	Navigation Navigation	
-	PageData []ContentBlock
+	Layout     string
+	PageMeta   PageMeta
+	Navigation Navigation
+	PageData   []ContentBlock
 }
 
 type PageMeta struct {
-	Title string
+	Title       string
 	Description string
 }
 
@@ -24,7 +24,7 @@ type NavigationItem struct {
 
 type ContentBlock interface {
 	IsContentBlock() bool
-	GetContentBlockType() string 
+	GetContentBlockType() string
 }
 
 type AboutBlockListItem struct {
