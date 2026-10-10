@@ -7,7 +7,7 @@ ContainerName=jonasluethi-web
 Pod=jonasluethiweb.pod
 
 [Service]
-Restart=unless-stopped
+Restart=always
 
 [Install]
 WantedBy=default.target
