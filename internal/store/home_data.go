@@ -8,10 +8,10 @@ import (
 
 const (
 	DefaultLayoutPath = "web/template/layout.html"
-	DefaultTitle = "jonasluethi.dev"
-	ProfilePicPath = "/static/images/profile-pic.jpg"
-	SwissDevIcon = "/static/images/swiss-dev.png"
-	FhnwIcon = "/static/images/fhnw.png"
+	DefaultTitle      = "jonasluethi.com"
+	ProfilePicPath    = "/static/images/profile-pic.jpg"
+	SwissDevIcon      = "/static/images/swiss-dev.png"
+	FhnwIcon          = "/static/images/fhnw.png"
 )
 
 func GetPage(r *http.Request) *models.Page {
@@ -24,7 +24,7 @@ func GetPage(r *http.Request) *models.Page {
 	return &models.Page{
 		Layout: DefaultLayoutPath,
 		PageMeta: models.PageMeta{
-			Title: title,
+			Title:       title,
 			Description: "Jonas Lüthi - Full-Stack Developer",
 		},
 		Navigation: getNavigation(r),
@@ -33,7 +33,7 @@ func GetPage(r *http.Request) *models.Page {
 			getExperienceBlock(),
 		},
 	}
-} 
+}
 
 func getNavigation(r *http.Request) models.Navigation {
 	currentPath := r.URL.Path
@@ -58,30 +58,30 @@ func newAboutSection(title string, items ...string) models.AboutBlockSection {
 
 func getAboutBlock() models.AboutBlock {
 	return models.AboutBlock{
-		AboutPic: ProfilePicPath,
+		AboutPic:   ProfilePicPath,
 		AboutTitle: "About me",
 		AboutSections: []models.AboutBlockSection{
 			newAboutSection(
 				"Summary",
 				"Passionate full-stack developer from Switzerland",
-                "Always learning new technologies and improving my homelab",
-                "Currently building automation and infrastructure tools for minecraft servers",
+				"Always learning new technologies and improving my homelab",
+				"Currently building automation and infrastructure tools for minecraft servers",
 			),
 			newAboutSection(
 				"Currently Building",
-                "Chunk Servers - CLI-Tool to deploy minecraft servers automatically",
-                "Homelab - Self hosted services, monitoring and automation",
-                "Portfolio site - It's this website",
+				"Chunk Servers - CLI-Tool to deploy minecraft servers automatically",
+				"Homelab - Self hosted services, monitoring and automation",
+				"Portfolio site - It's this website",
 			),
 			newAboutSection(
 				"Tech Stack",
-                "Languages - PHP, JavaScript, Python, Go",
-                "Frameworks - Symfony (Pimcore), Laravel, Angular, Vue",
-                "Tools - Docker, Docker Compose, Kubernetes, Proxmox",
+				"Languages - PHP, JavaScript, Python, Go",
+				"Frameworks - Symfony (Pimcore), Laravel, Angular, Vue",
+				"Tools - Docker, Docker Compose, Kubernetes, Proxmox",
 			),
 			newAboutSection(
 				"Get in touch",
-                "to@jonasluethi.dev",
+				"to@jonasluethi.dev",
 			),
 		},
 	}
@@ -97,7 +97,7 @@ func getExperienceBlock() models.ExperienceBlock {
 				Company:          "Swiss-Development GmbH",
 				Position:         "Full-stack developer",
 				EmploymentPeriod: "Sep 2021 - today",
-				Description: "I am responsible for developing websites for small to medium-sized businesses using modern PHP frameworks such as Pimcore, Symfony, and Laravel. In addition, I set up automated deployment pipelines with GitHub Actions to deploy these websites to virtual private servers (VPS). I also maintain and updat these servers to ensure security, stability, and reliable operation.",
+				Description:      "I specialize in developing websites for small and medium-sized businesses using modern PHP frameworks such as Pimcore, Symfony, and Laravel. I also manage our automated deployment pipelines with GitHub Actions and maintain our server infrastructure to ensure security, stability, and reliability.",
 			},
 			{
 				Icon:             SwissDevIcon,
@@ -105,7 +105,7 @@ func getExperienceBlock() models.ExperienceBlock {
 				Company:          "Swiss-Development GmbH",
 				Position:         "Frontend developer",
 				EmploymentPeriod: "Sep 2019 - Aug 2021",
-				Description: "My first job after my apprenticeship. I was responsible for implementing given designs with HTML, CSS and Javascript. There were also some opportunities to create some websites using Angular and Vuejs. After a while of only working on the frontend, I've got the chance to work on the backends of some websites.",
+				Description:      "I started my career in a frontend developer role, implementing designs with HTML, CSS, and JavaScript. This position also gave me the opportunity to build websites with modern frameworks like Angular and Vue.js. After gaining experience on the frontend, I expanded my skill set to backend development, allowing me to contribute to both sides of the development process.",
 			},
 			{
 				Icon:             FhnwIcon,
