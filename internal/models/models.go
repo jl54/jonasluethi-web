@@ -28,7 +28,8 @@ type ContentBlock interface {
 }
 
 type AboutBlockListItem struct {
-	Text string
+	ItemType string
+	Text     string
 }
 
 type AboutBlockSection struct {

@@ -46,11 +46,11 @@ func getNavigation(r *http.Request) models.Navigation {
 	}
 }
 
-func newAboutSection(title string, items ...string) models.AboutBlockSection {
+func newAboutSection(title string, items ...models.AboutBlockListItem) models.AboutBlockSection {
 	content := make([]models.AboutBlockListItem, len(items))
 
 	for i, item := range items {
-		content[i] = models.AboutBlockListItem{Text: item}
+		content[i] = item
 	}
 
 	return models.AboutBlockSection{Title: title, Content: content}
@@ -63,25 +63,25 @@ func getAboutBlock() models.AboutBlock {
 		AboutSections: []models.AboutBlockSection{
 			newAboutSection(
 				"Summary",
-				"Passionate full-stack developer from Switzerland",
-				"Always learning new technologies and improving my homelab",
-				"Currently building automation and infrastructure tools for minecraft servers",
+				models.AboutBlockListItem{ItemType: "text", Text: "Passionate full-stack developer from Switzerland"},
+				models.AboutBlockListItem{ItemType: "text", Text: "Always learning new technologies and improving my homelab"},
+				models.AboutBlockListItem{ItemType: "text", Text: "Currently building automation and infrastructure tools for minecraft servers"},
 			),
 			newAboutSection(
 				"Currently Building",
-				"Chunk Servers - CLI-Tool to deploy minecraft servers automatically",
-				"Homelab - Self hosted services, monitoring and automation",
-				"Portfolio site - It's this website",
+				models.AboutBlockListItem{ItemType: "text", Text: "Chunk Servers - CLI-Tool to deploy minecraft servers automatically"},
+				models.AboutBlockListItem{ItemType: "text", Text: "Homelab - Self hosted services, monitoring and automation"},
+				models.AboutBlockListItem{ItemType: "text", Text: "Portfolio site - It's this website"},
 			),
 			newAboutSection(
 				"Tech Stack",
-				"Languages - PHP, JavaScript, Python, Go",
-				"Frameworks - Symfony (Pimcore), Laravel, Angular, Vue",
-				"Tools - Docker, Docker Compose, Kubernetes, Proxmox",
+				models.AboutBlockListItem{ItemType: "text", Text: "Languages - PHP, JavaScript, Python, Go"},
+				models.AboutBlockListItem{ItemType: "text", Text: "Frameworks - Symfony (Pimcore), Laravel, Angular, Vue"},
+				models.AboutBlockListItem{ItemType: "text", Text: "Tools - Docker, Docker Compose, Kubernetes, Proxmox"},
 			),
 			newAboutSection(
 				"Get in touch",
-				"to@jonasluethi.dev",
+				models.AboutBlockListItem{ItemType: "mail", Text: "to@jonasluethi.dev"},
 			),
 		},
 	}
